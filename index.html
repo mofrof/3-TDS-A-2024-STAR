@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html id="principal" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo</title>
+</head>
+
+<body>
+    <h1>Bingo da ETE - MFL</h1>
+    <form action="" method="POST">
+        <label for="NumeroSorteado">Número Sorteado:</label>
+        <input type="number" name="NumeroSorteado" id="NumeroSorteado" min="1" max="99">
+        <input onclick="addNumeroSorteado()" type="button" value="ADD">
+    </form>
+    <h1>Lista dos número sorteados cadastrados</h1>
+    <p id="listaNumerosSorteados">Não possui números cadastrados</p>
+    <h1>Cadastro sorteio</h1>
+    <form action="" method="post">
+        <label for="CodCartela">Código da Cartela:</label>
+        <input type="text" name="CodCartela" id="CodCartela" value="Ex.: 00000">
+        <label for="NumerosCartela">Números Cartela:</label>
+    </form>
+</body>
+
+<script>
+
+    let vetorNumerosSorteados = []
+
+    function addNumeroSorteado() {
+        let valorDigitado = document.getElementsByTagName("input")[0].value;
+        if(valorDigitado > 0 && valorDigitado < 80){
+            vetorNumerosSorteados.push(valorDigitado);
+        }
+        document.getElementById("listaNumerosSorteados").innerHTML = vetorNumerosSorteados;
+    }
+
+
+</script>
+
+</html>
