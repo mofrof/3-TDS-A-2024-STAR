@@ -4,20 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
     <title>Bingo</title>
 </head>
 
 <body>
-    <h1>Bingo da ETE - MFL</h1>
+    <button ondblclick="addNovaTag()">add nova tag</button>
+    <button onmouseleave="rmTag()">rm tag</button>
     <form action="" method="POST">
+        <h1>Bingo da ETE - MFL</h1>
         <label for="NumeroSorteado">Número Sorteado:</label>
         <input type="number" name="NumeroSorteado" id="NumeroSorteado" min="1" max="99">
         <input onclick="addNumeroSorteado()" type="button" value="ADD">
+        <h1>Lista dos número sorteados cadastrados</h1>
+        <p id="listaNumerosSorteados">
+            Não possui números cadastrados
+        </p>
     </form>
-    <h1>Lista dos número sorteados cadastrados</h1>
-    <p id="listaNumerosSorteados">Não possui números cadastrados</p>
-    <h1>Cadastro sorteio</h1>
     <form action="" method="post">
+        <h1>Cadastro sorteio</h1>
         <label for="CodCartela">Código da Cartela:</label>
         <input type="text" name="CodCartela" id="CodCartela" value="Ex.: 00000">
         <label for="NumerosCartela">Números Cartela:</label>
@@ -29,14 +34,33 @@
     let vetorNumerosSorteados = []
 
     function addNumeroSorteado() {
-        let valorDigitado = document.getElementsByTagName("input")[0].value;
-        if(valorDigitado > 0 && valorDigitado < 80){
-            vetorNumerosSorteados.push(valorDigitado);
+        let tagInputValor = document.getElementById("NumeroSorteado");
+        let valorDigitado = tagInputValor.value;
+        
+        if(valorDigitado < 1 || valorDigitado > 81){
+            tagInputValor.className = "erro"
+            tagInputValor.style.color = "red"
+        }else if(vetorNumerosSorteados.includes(valorDigitado)){
+            alert("Numero já preenchido")
         }
-        document.getElementById("listaNumerosSorteados").innerHTML = vetorNumerosSorteados;
+        else{
+            vetorNumerosSorteados.push(valorDigitado);
+            document.getElementById("listaNumerosSorteados").innerHTML = vetorNumerosSorteados;
+            tagInputValor.className = null
+            tagInputValor.style.color = "black"
+        }
     }
+    function addNovaTag(){
+        let novaTag = document.createElement("h1")
+        novaTag.innerHTML = "Eu sou uma nova TAG"
 
-
+        document.body.append(novaTag)
+    }
+    function rmTag(){
+        let tagASerRemovida = document.body.getElementsByTagName("h1")[3]
+        document.body.removeChild(tagASerRemovida)
+        document.remove
+    }
 </script>
 
 </html>
