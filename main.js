@@ -41,9 +41,31 @@ function addNumeroSorteado() {
 
 //DeslocaETE
 function marcarNumeroSorteadoNasCartelas() {
-
+    function marcarNumeroSorteadoNasCartelas() {
+        let tagInputValor = document.getElementById("NumeroSorteado");
+        let valorDigitado = parseInt(tagInputValor.value);
+    
+        if (valorDigitado >= 1 && valorDigitado <= 81) {
+            let countNumeros = 0;
+    
+            while (countNumeros < listaCartelas.length) {
+                let cartela = listaCartelas[countNumeros];
+                let numeros = cartela[1];
+    
+                let contadorNumeros = 0;
+    
+                while (contadorNumeros < numeros.length) {
+                    if (numeros[contadorNumeros] === valorDigitado) {
+                        numeros[contadorNumeros] = -1;
+                    }
+                    contadorNumeros++;
+                }
+    
+                countNumeros++;
+            }
+        }
+    }
 }
-
 //Stone stock
 function atualizarCartelasProximasASeremBatidas() {
     let listaDeCartelas = document.getElementById("listaDeCartelas");
@@ -67,7 +89,7 @@ function atualizarCartelasProximasASeremBatidas() {
 function exibirCartelasCadastradas() {
 
     let cartelasDiv = document.getElementById('cartelasCadastradas');
-    cartelasDiv.innerHTML = ''; // Limpa o conteúdo atual
+    cartelasDiv.innerHTML = ''; 
 
     listaCartelas.forEach(cartela => {
         let cartelaDiv = document.createElement('div');
@@ -94,11 +116,10 @@ function exibirCartelasCadastradas() {
                 let cell = document.createElement('td');
                 let numIndex = j * 5 + i;
                 
-                // Verifica se é o termo do meio da cartela (índice 12)
+
                 if (numIndex === 12) {
-                    cell.textContent = ''; // Deixa o termo do meio em branco
+                    cell.textContent = ''; 
                 } else if (numIndex > 12) {
-                    // Se o índice for maior que 12, ajusta para a próxima casa
                     cell.textContent = cartela[1][numIndex - 1] || '';
                 } else {
                     cell.textContent = cartela[1][numIndex] || '';
