@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <!-- <button ondblclick="addNovaTag()">add nova tag</button>
-    <button onmouseleave="rmTag()">rm tag</button> -->
+
     <form action="" method="POST">
         <h1>Bingo da ETE - MFL</h1>
         <label for="NumeroSorteado">Número Sorteado:</label>
@@ -21,24 +20,64 @@
             Não possui números cadastrados
         </p>
     </form>
-    <form action="" method="post">
-        <h1>Cadastro sorteio</h1>
-        <label for="CodCartela">Código da Cartela:</label>
-        <input type="text" name="CodCartela" id="CodCartela" value="Ex.: 00000">
-        <label for="NumerosCartela">Números Cartela:</label>
-    </form>
+    <h1>Cadastro de Cartelas</h1>
+
+<form id="cadastroForm">
+    <label for="numeroInput">Digite o código da cartela:</label>
+    <input type="text" id="numeroInput" name="numero">
+    <button type="button" onclick="exibirNumero()">Enviar</button>
+</form>
+
+<script>
+    function exibirNumero() {
+        var numero = document.getElementById("numeroInput").value;
+
+        document.getElementById("numeroExibido").innerText = numero;
+    }
+</script>
+
+<form action="" method="POST">
+    <label for="NumeroCadastrado">Número Cadastrado:</label>
+    <input type="number" name="NumeroCadastrado" id="NumeroCadastrado" min="1" max="99">
+    <input onclick="addNumeroCadastrado()" type="button" value="Cadastrar">
+
+    <script>
+        let listaCartelasProximasASeremBatidas = []
+    let vetorNumerosCadastrado = []
+    function addNumeroCadastrado() {
+        let tagInputValor = document.getElementById("NumeroCadastrado");
+        let valorDigitado = tagInputValor.value;
+    
+        if (valorDigitado < 1 || valorDigitado > 81) {
+            tagInputValor.className = "erro"
+            tagInputValor.style.color = "red"
+        } else if (vetorNumerosCadastrado.includes(valorDigitado)) {
+            alert("Numero já preenchido")
+        } else {
+            vetorNumerosCadastrado.push(valorDigitado);
+            document.getElementById("listaNumerosCadastrado").innerHTML = vetorNumerosCadastrado;
+            tagInputValor.className = null
+            tagInputValor.style.color = "black"
+        }
+        }</script>
+        <div class="CartelasCad">
+            <h2>Cartelas Cadastradas:</h2>
+        Código: <div id="numeroExibido"></div>
+        <br>
+        Números:<div id="listaNumerosCadastrado">
+        </div>
+        </div>
+</form>
+<h1>Cartelas Proximas a Serem Batidas</h1>
+<ul id="listaDeCartelas">
+    <!-- Lista das cartelas com porcentagem marcada -->
+</ul>
 
 
-    <h1>Cartelas Proximas a Serem Batidas</h1>
-    <ul id="listaDeCartelas">
-        <!-- Lista das cartelas com porcentagem marcada -->
-    </ul>
+<div id="cartelasCadastradas"></div>
 
-
-    <div id="cartelasCadastradas"></div>
-
-    <div id="cartelasCadastradas"></div>
-    <button onclick="exibirCartelasCadastradas()">Exibir Cartelas Cadastradas</button>
+<div id="cartelasCadastradas"></div>
+<button onclick="exibirCartelasCadastradas()">Exibir Cartelas Cadastradas</button>
 
 </body>
 

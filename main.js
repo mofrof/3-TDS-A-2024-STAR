@@ -143,5 +143,28 @@ function analisarSeACartelaVencedora() {
 
 //CsC Junior Letal
 function cadastrarCartela() {
+    function exibirNumero() {
+        var numero = document.getElementById("numeroInput").value;
 
+        document.getElementById("numeroExibido").innerText = numero;
+    }
+    
+    let listaCartelasProximasASeremBatidas = []
+    let vetorNumerosCadastrado = []
+    function addNumeroCadastrado() {
+        let tagInputValor = document.getElementById("NumeroCadastrado");
+        let valorDigitado = tagInputValor.value;
+    
+        if (valorDigitado < 1 || valorDigitado > 81) {
+            tagInputValor.className = "erro"
+            tagInputValor.style.color = "red"
+        } else if (vetorNumerosCadastrado.includes(valorDigitado)) {
+            alert("Numero já preenchido")
+        } else {
+            vetorNumerosCadastrado.push(valorDigitado);
+            document.getElementById("listaNumerosCadastrado").innerHTML = vetorNumerosCadastrado;
+            tagInputValor.className = null
+            tagInputValor.style.color = "black"
+        }
+        }
 }
